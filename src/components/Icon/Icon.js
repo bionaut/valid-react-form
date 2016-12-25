@@ -15,19 +15,19 @@ const Icon = ({ type, className, ...other }) => {
     case 'clear':
     case 'cancel':
     case 'close':
-      body = <CloseIcon />;
+      body = <CloseIcon style={styles.iconSvg} />;
       break;
     case 'invalid':
     case 'error':
-      body = <InvalidIcon fill={errorColor} />;
+      body = <InvalidIcon fill={errorColor} style={styles.iconSvg} />;
       break;
     case 'valid':
     case 'check':
-      body = <CheckIcon fill={primaryColor} />;
+      body = <CheckIcon fill={primaryColor} style={styles.iconSvg} />;
       break;
     case 'optional':
     default:
-      body = <OptionalIcon />;
+      body = <OptionalIcon style={styles.iconSvg} />;
   }
 
   return (

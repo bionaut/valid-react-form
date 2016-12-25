@@ -65,10 +65,15 @@ export default {
   },
 
   icon: {
-    position: 'relative',
-    right: 0,
+    display: 'inline-block',
+    height: `${defaultItemSize}px`,
+    lineHeight: `${defaultItemSize}px`
+  },
+
+  iconSvg: {
+    position:'relative',
     top: '50%',
-    marginTop: '-0.5em'
+    transform: 'translateY(-50%)'
   },
 
   invalid: {
@@ -292,6 +297,39 @@ export default {
       disabled: {
         backgroundColor: tc(darkColor).lighten(20).toString(),
       }
+    }
+  },
+
+  helper: {
+    display: 'inline-block',
+    cursor: 'pointer',
+    height: `${defaultItemSize}px`,
+    lineHeight: `${defaultItemSize}px`
+  },
+
+  tooltip: {
+    position: 'absolute',
+    lineHeight: 1,
+    fontSize: '0.9em',
+    width: 'auto',
+    backgroundColor: 'yellow',
+    minHeight: `${defaultItemSize}px`,
+    right: 0,
+    bottom: `${defaultItemSize + 10}px`,
+    paddingTop: smallGap,
+    paddingLeft: smallGap,
+    paddingRight: smallGap,
+    paddingBottom: smallGap,
+    borderRadius: smallGap,
+    after:{
+      position: 'absolute',
+      width: '10px',
+      height: '10px',
+      bottom: '-5px',
+      right: '10px',
+      backgroundColor: 'yellow',
+      transform: 'rotateZ(45deg)',
+      fontWeight: 400
     }
   }
 

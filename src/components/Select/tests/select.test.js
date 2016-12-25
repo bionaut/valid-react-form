@@ -25,7 +25,7 @@ describe('Select component', () => {
     const registerSpy = spy();
     const wrp = getWrapper({
       label: 'Some label',
-      name:'select',
+      name: 'select',
       value: 1,
       data: selectData,
       errorMessages: 'Some error'
@@ -67,7 +67,7 @@ describe('Select component', () => {
     expect(wrp.find('.valid-select-options')).to.have.length(0);
     wrp.find('.valid-select-body').simulate('click');
     expect(wrp.find('.valid-select-options')).to.have.length(1);
-    wrp.find({title: 'Option 1'}).simulate('click');
+    wrp.find({ title: 'Option 1' }).simulate('click');
     expect(updateSpy).to.have.property('callCount', 2);
   });
 
@@ -111,9 +111,9 @@ describe('Select component', () => {
       returnAs: 'customValue',
       viewAs: 'customLabel',
       data: [
-        {customValue: 1, customLabel: 'Custom Option 1'},
-        {customValue: 2, customLabel: 'Custom Option 2'},
-        {customValue: 3, customLabel: 'Custom Option 3'}
+        { customValue: 1, customLabel: 'Custom Option 1' },
+        { customValue: 2, customLabel: 'Custom Option 2' },
+        { customValue: 3, customLabel: 'Custom Option 3' }
       ]
 
     }, {
@@ -123,8 +123,8 @@ describe('Select component', () => {
     expect(wrp.find('.valid-select-options')).to.have.length(0);
     wrp.find('.valid-select-body').simulate('click');
     expect(wrp.find('.valid-select-options')).to.have.length(1);
-    expect(wrp.find({title: 'Custom Option 1'})).to.have.length(1);
-    wrp.find({title: 'Custom Option 1'}).simulate('click');
+    expect(wrp.find({ title: 'Custom Option 1' })).to.have.length(1);
+    wrp.find({ title: 'Custom Option 1' }).simulate('click');
     expect(updateSpy).to.have.property('callCount', 2);
     expect(updateSpy.lastCall.args).to.be.deep.equal(['select', 1, undefined]);
   });
@@ -140,11 +140,24 @@ describe('Select component', () => {
     });
     expect(wrp.find('.valid-select-clear')).to.have.length(0);
     wrp.find('.valid-select-body').simulate('click');
-    wrp.find({title: 'Option 1'}).simulate('click');
+    wrp.find({ title: 'Option 1' }).simulate('click');
     expect(wrp.find('.valid-select-value')).to.have.text('Option 1');
     expect(wrp.find('.valid-select-clear')).to.have.length(1);
     wrp.find('.valid-select-clear').simulate('click');
     expect(wrp.find('.valid-select-value')).to.have.length(0);
+  });
+
+  it('should not have icons when readonly', () => {
+    const wrp = getWrapper({
+      label: 'Some label',
+      required: true,
+      icons: true,
+      data: selectData
+    }, {
+      readOnly: true,
+      submitted: true
+    });
+    expect(wrp.find('.valid-icon')).to.have.length(0);
   });
 
 

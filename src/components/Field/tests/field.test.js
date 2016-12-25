@@ -190,4 +190,16 @@ describe('Valid Field', () => {
     expect(wrp.find('.valid-form-error')).to.have.length(0);
   });
 
+  it('should not display icons when read-only', () => {
+    const wrp = mount(<Field errorMessages="Some error" icons={true} required={true} name="test"/>, {context: {submitted: true}});
+    expect(wrp.find('.valid-icon error')).to.have.length(0);
+  });
+
+  it('should display a helper ', () => {
+    const wrp = mount(<Field errorMessages="Some error" icons={true} required={true} name="test"/>, {context: {submitted: true}});
+    expect(wrp.find('.valid-icon error')).to.have.length(0);
+  });
+
+
+
 });

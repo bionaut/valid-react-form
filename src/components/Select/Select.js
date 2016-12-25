@@ -216,6 +216,7 @@ export default class Select extends Component {
       scrollTrigger,
       style,
       friendlyName,
+      helper,
       ...other
     } = this.props;
 
@@ -229,7 +230,7 @@ export default class Select extends Component {
     } = this.state;
 
     const isReadOnly = this.context.readOnly || this.props.readOnly;
-    const iconsProps = { label, icons, submitted, standalone, valid, required, validator, disabled };
+    const iconsProps = {readOnly: isReadOnly, label, icons, submitted, standalone, valid, required, validator, disabled, helper };
     const errorProps = { message: !errorPanel && (submitted || standalone) && !disabled && !isReadOnly && ((errors && errors[name]) || resolveError(errorMessages, failedValidator)) };
 
     const wrapperClasses = classes(

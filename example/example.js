@@ -1,6 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ValidForm, Field, ValidStyles, Button, Valid, Toggle, Select } from '../src/index';
+import {
+  ValidForm,
+  Field,
+  ValidStyles,
+  Button,
+  Valid,
+  Toggle,
+  Select,
+  Helper
+} from '../src/index';
 
 const dummyHandler = function (payload) {
   console.log(payload);
@@ -45,37 +54,37 @@ const Example = () => (
   <div style={wrapperStyle}>
 
     <ValidStyles>
-      <Toggle onChange={toggleOnChange} name="toggle" >Toggle Read-Only mode</Toggle>
+      <Toggle onChange={toggleOnChange} name='toggle' >Toggle Read-Only mode</Toggle>
     </ValidStyles>
 
     <ValidStyles>
-      <ValidForm readOnly={someSwitch} errorPanel={true} extended={{ extended: 'extended_data' }} debug={true} onSubmit={dummyHandler} autoComplete="off">
+      <ValidForm readOnly={someSwitch} errorPanel={true} extended={{ extended: 'extended_data' }} debug={true} onSubmit={dummyHandler} autoComplete='off'>
 
         <h2>Field</h2>
-        <Field icons={true} label="Some label" placeholder="must contain test" errorMessages={errorMessages} name="field1" friendlyName="Validated field" validator="isAlpha|contains:test" required={true}/>
-        <Field disabled={true} value="disabled value" label="Some label" placeholder="is disabled" errorMessages={errorMessages} name="field2" friendlyName="Disabled field" required={true}/>
-        <Field label="Some label" placeholder="type something" errorMessages={errorMessages} name="field3" friendlyName="Required field" required={true}/>
+        <Field icons={true} label='Some label' placeholder='must contain test' errorMessages={errorMessages} name='field1' friendlyName='Validated field' validator='isAlpha|contains:test' required={true}/>
+        <Field disabled={true} value='disabled value' label='Some label' placeholder='is disabled' errorMessages={errorMessages} name='field2' friendlyName='Disabled field' required={true}/>
+        <Field helper='This is helper tooltip text example' label='Some label' placeholder='type something' errorMessages={errorMessages} name='field3' friendlyName='Required field' required={true}/>
 
         <h2>Toggle</h2>
-        <Toggle name="toggle" friendlyName="Check" required={true}>Check this!</Toggle>
-        <Toggle disabled={true} name="toggle2" friendlyName="Check2" required={true} >Disabled</Toggle>
+        <Toggle name='toggle' friendlyName='Check' required={true}>Check this!</Toggle>
+        <Toggle disabled={true} name='toggle2' friendlyName='Check2' required={true} >Disabled</Toggle>
 
         <h2>Select</h2>
         <Select scrollTrigger={15} label='Normal Select' placeholder='Select something' data={selectData} name='select1'/>
         <Select value={2} label='Preselected' data={selectData} name='select2' friendlyName='Select'/>
         <Select value={1} label='Disabled' disabled={true} placeholder='Select something' data={selectData} name='select3' />
         <Select icons={true} label='Required' required={true} placeholder='This select is required' data={selectData} name='select4'/>
-        <Select clearButton={true} label='Some label' required={true} errorMessages='Choose something' placeholder='This select is with error' data={selectData} name='select5' friendlyName='Select'/>
+        <Select helper='some help' clearButton={true} label='Some label' required={true} errorMessages='Choose something' placeholder='This select is with error' data={selectData} name='select5' friendlyName='Select'/>
 
         <br/>
-        <label htmlFor="uni">Universal wrapper</label>
-        <Valid errorMessages="This is invalid!" name="uni" friendlyName="Universal" required={true} validator="isLength:3">
-          <input name="uni" id="universal" type="text"/>
+        <label htmlFor='uni'>Universal wrapper</label>
+        <Valid errorMessages='This is invalid!' name='uni' friendlyName='Universal' required={true} validator='isLength:3'>
+          <input name='uni' id='universal' type='text'/>
         </Valid>
         <br/>
 
         <br/>
-        <Button fullWidth={false} type="submit">Submit</Button>
+        <Button fullWidth={false} type='submit'>Submit</Button>
 
       </ValidForm>
     </ValidStyles>

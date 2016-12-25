@@ -14,7 +14,11 @@ export default class ValidStyles extends Component {
 
 
   render() {
-    return this.props.children;
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    )
   }
 }
 

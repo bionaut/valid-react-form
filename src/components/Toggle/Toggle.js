@@ -149,17 +149,16 @@ export default class Toggle extends Component {
     const tab = (disabled || isReadOnly) ? '' : '0';
 
     return (
-      <div {...other} key='0' style={wrapperStyles} className={wrapperClasses}>
+      <div {...other} style={wrapperStyles} className={wrapperClasses}>
         <div tabIndex={tab}
-             key='1'
              style={bodyStyles}
              onKeyPress={this.handleChange.bind(this)}
              onClick={this.handleChange.bind(this)}
              className='valid-toggle-body'>
-          <div key='2' style={headStyles} className='valid-toggle-head'></div>
+          <div style={headStyles} className='valid-toggle-head'></div>
         </div>
         { !!(label || children) &&
-        <div key='3' style={styles && styles.toggle.label} className='valid-toggle-label'>{label || children}</div>}
+        <div style={styles && styles.toggle.label} className='valid-toggle-label'>{label || children}</div>}
         <Error {...errorProps} />
       </div>
     );

@@ -158,6 +158,11 @@ export default class Select extends Component {
         expanded && this.handleSelect(target);
         return;
       case keycode('esc'):
+      case keycode('tab'):
+      case keycode('ctrl'):
+      case keycode('alt'):
+      case keycode('cmd'):
+      case keycode('shift'):
         this.handleClose();
         return;
       case keycode('down'):

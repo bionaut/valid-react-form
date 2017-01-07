@@ -184,6 +184,24 @@ export default class Field extends Component {
   }
 }
 
+Field.propTypes = {
+  required: PropTypes.bool,
+  validator: PropTypes.string,
+  standalone: PropTypes.bool,
+  icons: PropTypes.bool,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  errorMessages: PropTypes.any,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  style: PropTypes.object,
+  friendlyName: PropTypes.string,
+  debounce: PropTypes.number,
+  helper: PropTypes.string,
+};
+
 Field.contextTypes = {
   styles: PropTypes.object,
   readOnly: PropTypes.bool,

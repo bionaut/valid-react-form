@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import mainStyles from './mainStyles';
+import mainStyles, { colors, constants } from './mainStyles';
 
 export default class ValidStyles extends Component {
   constructor(props) {
@@ -8,7 +8,10 @@ export default class ValidStyles extends Component {
 
   getChildContext() {
     return {
-      styles: mainStyles
+      styles: mainStyles(
+        Object.assign({}, colors, this.props.colors),
+        Object.assign({}, constants, this.props.constants)
+      )
     }
   };
 

@@ -38,6 +38,11 @@ class Helper extends Component {
   }
 }
 
+Helper.propTypes = {
+  text: PropTypes.string,
+  children: PropTypes.node
+};
+
 Helper.contextTypes = {
   styles: PropTypes.object
 };

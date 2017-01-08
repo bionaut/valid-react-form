@@ -8,7 +8,7 @@ import {
   Valid,
   Toggle,
   Select,
-  Helper
+  Slider
 } from '../src/index';
 
 const dummyHandler = function (payload) {
@@ -59,6 +59,12 @@ const Example = () => (
 
     <ValidStyles>
       <ValidForm readOnly={someSwitch} errorPanel={true} extended={{ extended: 'extended_data' }} debug={true} onSubmit={dummyHandler} autoComplete='off'>
+
+        <h2>Slider</h2>
+        <div style={{padding: '20px' }}>
+          <Slider name='slider' min={-5} max={5}
+                  stepTicks={true} step={1} value={0} range={true}/>
+        </div>
 
         <h2>Field</h2>
         <Field icons={true} label='Some label' placeholder='must contain test' errorMessages={errorMessages} name='field1' friendlyName='Validated field' validator='isAlpha|contains:test' required={true}/>

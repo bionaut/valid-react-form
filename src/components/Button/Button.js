@@ -19,6 +19,11 @@ class Button extends Component {
   }
 }
 
+Button.propTypes = {
+  children: PropTypes.node,
+  fullWidth: PropTypes.bool
+};
+
 Button.contextTypes = {
   readOnly: PropTypes.bool,
   styles: PropTypes.object

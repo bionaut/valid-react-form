@@ -1,3 +1,8 @@
+**v0.2.1**
+----------
+- Refactored styles and icons
+
+
 **v0.2.0**
 ----------
 - Added Helper component

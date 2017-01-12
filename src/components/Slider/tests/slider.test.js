@@ -7,7 +7,7 @@ import { mount } from 'enzyme';
 import { spy, stub } from 'sinon';
 
 import Slider from '../Slider';
-import styles, {colors, constants} from '../../ValidStyles/mainStyles';
+import styles, {defaultColors, defaultConstants} from '../../ValidStyles/mainStyles';
 
 describe('Slider component', () => {
 
@@ -27,7 +27,7 @@ describe('Slider component', () => {
       errorMessages: 'Some error'
     }, {
       register: registerSpy,
-      styles: styles(colors, constants)
+      styles: styles(defaultColors, defaultConstants)
     });
     expect(registerSpy).to.have.property('callCount', 1);
     expect(registerSpy.lastCall.args).to.be.deep.equal(['slider', 'Friendly', 'Some error']);

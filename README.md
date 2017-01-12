@@ -1,7 +1,8 @@
-#VALID REACT FORM
-work in progress :) 
+#VALID REACT FORM 
     
 Easy form validations with customizable components, error handling and payload generator, that can be used for AJAX. 
+ 
+*note: documentation in progress :)*
  
 ##Installation
  
@@ -14,7 +15,6 @@ npm install valid-react-form
 ## Usage
 
 #### 1. Include it in your project
-
 
 
 ```jsx
@@ -155,14 +155,14 @@ function onSubmitCallback(payload){
 - **debounce**: onChange callback delay (in milliseconds)
  
 ###Select component
-TODO DOCS
+TODO DOCS - meanwhile check example.js
 
 ###Toggle component
-TODO DOCS
+TODO DOCS - meanwhile check example.js
 
 ###Button component
-TODO DOCS
+TODO DOCS - meanwhile check example.js
 
 ###Valid (universal) component
-TODO DOCS
+TODO DOCS - meanwhile check example.js
 

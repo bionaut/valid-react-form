@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-
 import { VIEW_AS } from './Select';
-import { defaultItemSize } from '../ValidStyles/mainStyles';
 
 @Radium
 class Options extends Component {
@@ -43,8 +41,8 @@ class Options extends Component {
     const source = children || data;
     const length = source && source.length;
 
-    const compensateStyle = {
-      marginTop: `-${scroll * defaultItemSize}px`
+    const compensateStyle = styles && {
+      marginTop: `-${scroll * styles.constants.defaultItemSize}px`
     };
 
     const computedStyles = styles && [

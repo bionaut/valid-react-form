@@ -1,6 +1,6 @@
 import tc from 'tinycolor2';
 
-export const colors = {
+export const defaultColors = {
   primaryColor: '#38C2FF',
   secondaryColor: '#c5e767',
   lightColor: '#dddddd',
@@ -9,7 +9,7 @@ export const colors = {
   errorColor: '#E74C3C'
 };
 
-export const constants = {
+export const defaultConstants = {
   defaultItemSize: 30,
   gap: '10px',
   smallGap: '5px',
@@ -18,21 +18,25 @@ export const constants = {
   defaultRadius: '5px'
 };
 
-export default function ({
-  primaryColor,
-  secondaryColor,
-  lightColor,
-  darkColor,
-  tooltipColor,
-  errorColor
-}, {
-  defaultItemSize,
-  smallGap,
-  fontSize,
-  defaultTransition,
-  defaultRadius,
-  gap,
-}) {
+export default function (colors, constants) {
+
+  const {
+    primaryColor,
+    secondaryColor,
+    lightColor,
+    darkColor,
+    tooltipColor,
+    errorColor
+  } = colors;
+
+  const {
+    defaultItemSize,
+    smallGap,
+    fontSize,
+    defaultTransition,
+    defaultRadius,
+    gap,
+  } = constants;
 
   const fullWidth = '100%';
   const z1 = '1';
@@ -43,6 +47,8 @@ export default function ({
   };
 
   return {
+    colors,
+    constants,
     base: {
       position: 'relative',
       boxSizing: 'border-box',
@@ -171,7 +177,7 @@ export default function ({
       option: {
         position: 'relative',
         width: fullWidth,
-        backgroundColor: lightColor,
+        backgroundColor: tc(lightColor).lighten(30).toString(),
         height: `${defaultItemSize}px`,
         lineHeight: `${defaultItemSize}px`,
         paddingLeft: smallGap,
@@ -413,7 +419,7 @@ export default function ({
       lineHeight: 1,
       fontSize: '0.9em',
       width: 'auto',
-      backgroundColor: 'yellow',
+      backgroundColor: tooltipColor,
       minHeight: `${defaultItemSize}px`,
       right: 0,
       bottom: `${defaultItemSize + 10}px`,

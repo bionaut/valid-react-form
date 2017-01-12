@@ -296,7 +296,7 @@ export default class Select extends Component {
           <Icon onClick={ this.handleClear.bind(this)} type='clear' className='valid-select-clear'/>
         </div>
         }
-        <Icons {...iconsProps} />
+        { !clearButton && <Icons {...iconsProps} /> }
         <Error {...errorProps} />
       </div>
     );

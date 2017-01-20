@@ -1,3 +1,8 @@
+**v0.2.2**
+----------
+- Added touch events for Slider
+
+
 **v0.2.1**
 ----------
 - Refactored styles and icons

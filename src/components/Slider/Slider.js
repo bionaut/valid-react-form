@@ -33,7 +33,11 @@ export default class Slider extends Component {
     });
 
     this.mouseUpListener = window.addEventListener('mouseup', this.handleDrop.bind(this));
+    this.touchEndListener = window.addEventListener('touchend', this.handleDrop.bind(this));
+    this.touchCancelListener = window.addEventListener('touchcancel', this.handleDrop.bind(this));
     this.mouseMoveListener = window.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    this.touchMoveListener = window.addEventListener('touchmove', this.handleMouseMove.bind(this));
+
     this.resize = window.addEventListener('resize', () => {
       this.calibrateUnits(() => {
         this.update(value);
@@ -163,9 +167,10 @@ export default class Slider extends Component {
 
   handleMouseMove(ev) {
     const { dragging } = this.state;
-    const { pageX } = ev;
+    const { pageX, touches } = ev;
     if (dragging) {
-      this.handleHeadMove(pageX);
+      ev.preventDefault();
+      this.handleHeadMove(pageX || touches[0]);
     }
   }
 
@@ -306,6 +311,8 @@ export default class Slider extends Component {
                onBlur={this.handleBlur.bind(this)}
                onMouseDown={this.handleGrab.bind(this)}
                onKeyDown={this.handleKeyDown.bind(this)}
+               onTouchStart={this.handleGrab.bind(this)}
+               onTouchEnd={this.handleKeyDown.bind(this)}
                tabIndex={tab} style={headStyles}>
             { (isReadOnly || focused) &&
             <div style={valueStyles}>

@@ -26,11 +26,11 @@ class Icon extends Component {
         break;
       case 'invalid':
       case 'error':
-        body = <InvalidIcon fill={styles && styles.colors.errorColor} style={styles && styles.iconSvg}/>;
+        body = <InvalidIcon fill={styles && styles.errorColor} style={styles && styles.iconSvg}/>;
         break;
       case 'valid':
       case 'check':
-        body = <CheckIcon fill={styles && styles.colors.primaryColor} style={styles && styles.iconSvg}/>;
+        body = <CheckIcon fill={styles && styles.primaryColor} style={styles && styles.iconSvg}/>;
         break;
       case 'optional':
       default:

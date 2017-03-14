@@ -4,11 +4,12 @@ import Radium from 'radium';
 @Radium
 class Button extends Component {
   render() {
-    const { children, fullWidth, ...other } = this.props;
+    const { children, fullWidth, style, ...other } = this.props;
     const { styles, readOnly } = this.context;
     const computedStyles = styles && [
         styles.button,
-        fullWidth && styles.button.fullWidth
+        fullWidth && styles.button.fullWidth,
+        style
       ];
 
     return !readOnly && (

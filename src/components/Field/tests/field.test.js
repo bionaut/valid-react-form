@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import { contain } from 'chai-enzyme';
 import { mount, shallow } from 'enzyme';
 import { spy, stub } from 'sinon';
+import validator from 'validator';
 
 import ValidForm from '../../ValidForm/ValidForm';
 import Field from '../Field';
@@ -81,38 +82,38 @@ describe('Valid Field', () => {
   });
 
   it('should show error icon in standalone mode and init value', () => {
-    const wrp = mount(<Field standalone={true} icons={true} name='test' validator="isLength:4" value="123"/>);
+    const wrp = mount(<Field standalone={true} icons={true} name='test' validator={{isLength: (value) => validator.isLength(value, {min:4})}} value="123"/>);
     const icon = wrp.find('.valid-icon');
     expect(icon).to.have.className('error');
   });
 
   it('should show OK icon in standalone mode and init value', () => {
-    const wrp = mount(<Field standalone={true} icons={true} name='test' validator="isLength:4" value="1234"/>);
+    const wrp = mount(<Field standalone={true} icons={true} name='test' validator={{isLength: (value) => validator.isLength(value, {min:4})}} value="1234"/>);
     const icon = wrp.find('.valid-icon');
     expect(icon).to.have.className('valid');
   });
 
   it('should show error message in standalone mode and init value', () => {
-    const wrp = mount(<Field standalone={true} errorMessages="Error" name='test' validator="isLength:4" value="123"/>);
+    const wrp = mount(<Field standalone={true} errorMessages="Error" name='test' validator={{isLength: (value) => validator.isLength(value, {min:4})}} value="123"/>);
     const error = wrp.find('.valid-form-error');
     expect(error).to.have.length(1);
   });
 
   it('should not show error message if errorPanel=true', () => {
-    const wrp = mount(<Field errorMessages="Error" name='test' validator="isLength:4" value="123"/>, { context: { errorPanel: true } });
+    const wrp = mount(<Field errorMessages="Error" name='test' validator={{isLength: (value) => validator.isLength(value, {min:4})}} value="123"/>, { context: { errorPanel: true } });
     const error = wrp.find('.valid-form-error');
     expect(error).to.have.length(0);
   });
 
   it('should display external error', () => {
-    const wrp = mount(<Field standalone={true} errorMessages="Local Error" name='test' validator="isLength:4" value="123"/>, { context: { errors: {test: 'External error'} } });
+    const wrp = mount(<Field standalone={true} errorMessages="Local Error" name='test' validator={{isLength: (value) => validator.isLength(value, {min:4})}} value="123"/>, { context: { errors: {test: 'External error'} } });
     const error = wrp.find('.valid-form-error');
     expect(error).to.have.length(1);
     expect(error).to.have.text('External error');
   });
 
   it('should be disabled', () => {
-    const wrp = mount(<Field name="test" validator="isLength:0:2" disabled={true} value="1234"/>);
+    const wrp = mount(<Field name="test" validator={{isLength: (value) => validator.isLength(value, {min:0, max: 2})}} disabled={true} value="1234"/>);
     expect(wrp.find('input')).to.be.disabled();
     expect(wrp.find('.valid-icon')).to.have.length(0);
     expect(wrp.find('.valid-form-error')).to.have.length(0);
@@ -140,7 +141,10 @@ describe('Valid Field', () => {
 
     const wrp = mount(
       <ValidForm>
-        <Field placeholder="world" errorMessages={errorMessages} name="testField3" friendlyName="Test Field 3" validator="isAlpha|contains:test" required={true}/>
+        <Field placeholder="world" errorMessages={errorMessages} name="testField3" friendlyName="Test Field 3" validator={{
+          isAlpha: (value) => validator.isAlpha(value),
+          contains: (value) => validator.contains(value, 'test')
+        }} required={true}/>
       </ValidForm>
     );
     wrp.find('form').simulate('submit');
@@ -150,7 +154,7 @@ describe('Valid Field', () => {
 
   it('should debounce', (done) => {
     const onChangeSpy = spy();
-    const wrp = mount(<Field debounce={100} onChange={onChangeSpy} name="test"/>)
+    const wrp = mount(<Field debounce={100} onChange={onChangeSpy} name="test"/>);
     wrp.find('input').simulate('change', { target: { value: 'My new value' } });
     expect(onChangeSpy).to.have.property('callCount', 0);
     setTimeout(() => {
@@ -160,7 +164,7 @@ describe('Valid Field', () => {
   });
 
   it('should switch readOnly mode when global readOnly', () => {
-    const wrp = mount(<Field name="test"/>, {context: { readOnly: true }})
+    const wrp = mount(<Field name="test"/>, {context: { readOnly: true }});
     expect(wrp.find('.read-only')).to.have.length(1);
   });
 

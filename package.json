@@ -1,6 +1,6 @@
 {
   "name": "valid-react-form",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "React form components with validations and error handling",
   "main": "dist/index.js",
   "repository": {
@@ -9,9 +9,10 @@
   },
   "scripts": {
     "prepublish": "rm -rf dist && mkdir dist && babel ./src --out-dir ./dist",
-    "start": "webpack-dev-server --config webpack.app.dev.js --progress",
     "test": "mocha .scripts/mocha_boot.js src/**/tests/**/*.js --require babelhook",
-    "test-watch": "npm run test -- --watch --watch-extensions js"
+    "test-watch": "npm run test -- --watch --watch-extensions js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "files": [
     "dist"
@@ -22,7 +23,7 @@
     "validation"
   ],
   "author": "Janci <janci.krajnak@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.8.0",
     "babel-loader": "^6.2.4",
@@ -39,7 +40,9 @@
     "react-addons-test-utils": "^15.0.2",
     "sinon": "^1.17.4",
     "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "@kadira/storybook": "^2.21.0",
+    "validator": "^5.2.0"
   },
   "dependencies": {
     "deep-equal": "^1.0.1",
@@ -48,7 +51,7 @@
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-icons": "^2.2.1",
-    "tinycolor2": "^1.4.1",
-    "validator": "^5.2.0"
+    "react-syntax-highlighter": "^5.0.0",
+    "tinycolor2": "^1.4.1"
   }
 }

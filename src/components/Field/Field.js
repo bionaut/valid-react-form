@@ -161,12 +161,13 @@ export default class Field extends Component {
         styles.field,
         disabled && !isReadOnly && styles.field.disabled,
         isReadOnly && styles.field.readOnly,
-        submitted && !valid && !disabled && !isReadOnly && styles.field.error
+        submitted && !valid && !disabled && !isReadOnly && styles.field.error,
+        style
       ];
 
     return (
       <div style={styles && styles.base} className={wrapperClasses}>
-        {label && <label style={styles && styles.label} htmlFor={name}>{label}</label>}
+        {label && <label style={styles && styles.label} className='field_label' htmlFor={name}>{label}</label>}
         <input
           {...other}
           style={computedStyles}
@@ -187,7 +188,7 @@ export default class Field extends Component {
 
 Field.propTypes = {
   required: PropTypes.bool,
-  validator: PropTypes.string,
+  validator: PropTypes.object,
   standalone: PropTypes.bool,
   icons: PropTypes.bool,
   placeholder: PropTypes.string,

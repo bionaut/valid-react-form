@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import { contain } from 'chai-enzyme';
 import { mount, shallow } from 'enzyme';
 import { spy, stub } from 'sinon';
+import validator from 'validator';
 
 import Valid from '../Valid';
 
@@ -39,7 +40,9 @@ describe('Valid universal component', () => {
       {
         name: 'test',
         value: 'passed',
-        validator: 'isLength:2',
+        validator: {
+          isLength: (value) => validator.isLength(value, {min:2, max: undefined}),
+        },
         errorMessages: 'Some error'
       },
       {
@@ -57,7 +60,7 @@ describe('Valid universal component', () => {
       {
         name: 'test',
         value: 'passed',
-        validator: 'isLength:2',
+        validator: {isLength: (value) => validator.isLength(value, {min:2})},
         errorMessages: 'Some error'
       },
       {

@@ -11,8 +11,6 @@ import Field from '../../Field/Field';
 
 describe('Valid Form', () => {
   const errorMessages = {
-    isAlpha: 'Only alpha',
-    contains: 'This has to contain test',
     required: 'This field is required'
   };
 
@@ -20,9 +18,9 @@ describe('Valid Form', () => {
 
   const wrp = mount(
     <ValidForm errorPanel={true} onSubmit={submitSpy} extended={{ extended: 'extended_data' }}>
-      <Field errorMessages={errorMessages} required={true} name="field1" friendlyName="Demo Field"/>
-      <Field placeholder="world" errorMessages={errorMessages} name="field2" friendlyName="Test Field 3" validator="isAlpha|contains:test" required={true}/>
-      <button type="submit">Submit</button>
+      <Field errorMessages={errorMessages} required={true} name='field1' friendlyName='Demo Field'/>
+      <Field placeholder='world' errorMessages={errorMessages} name='field2' friendlyName='Test Field 3' required={true}/>
+      <button type='submit'>Submit</button>
     </ValidForm>
   );
 
@@ -65,8 +63,8 @@ describe('Valid Form', () => {
   it('should submit and have extended data + input data', () => {
     const wrapper = mount(
       <ValidForm errorPanel={true} onSubmit={submitSpy} extended={{ extended: 'extended_data' }}>
-        <Field errorMessages={errorMessages} required={true} name="field1" friendlyName="Demo Field"/>
-        <button type="submit">Submit</button>
+        <Field errorMessages={errorMessages} required={true} name='field1' friendlyName='Demo Field'/>
+        <button type='submit'>Submit</button>
       </ValidForm>
     );
     expect(submitSpy).to.have.property('callCount', 0);
@@ -84,8 +82,8 @@ describe('Valid Form', () => {
     const onSubmitSpy = spy();
     const wrapper = mount(
       <ValidForm errorPanel={true} onSubmit={onSubmitSpy} errors={{ field1: 'Some external error!' }}>
-        <Field errorMessages={errorMessages} required={true} name="field1" friendlyName="Demo Field"/>
-        <button type="submit">Submit</button>
+        <Field errorMessages={errorMessages} required={true} name='field1' friendlyName='Demo Field'/>
+        <button type='submit'>Submit</button>
       </ValidForm>
     );
     expect(onSubmitSpy).to.have.property('callCount', 0);

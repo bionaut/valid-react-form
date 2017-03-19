@@ -1,24 +1,32 @@
 import tc from 'tinycolor2';
 
-export const defaultColors = {
-  primaryColor: '#38C2FF',
-  secondaryColor: '#c5e767',
-  lightColor: '#dddddd',
-  darkColor: '#464646',
-  tooltipColor: '#ffdf81',
-  errorColor: '#E74C3C'
-};
+export class Styles {
+  constructor(custom = {} ){
+    this.primaryColor = custom.primaryColor || '#38C2FF';
+    this.secondaryColor = custom.secondaryColor || '#c5e767';
+    this.lightColor = custom.lightColor || '#dddddd';
+    this.borderColor = custom.borderColor || '#dddddd';
+    this.darkColor = custom.darkColor || '#464646';
+    this.tooltipColor = custom.tooltipColor || '#ffdf81';
+    this.errorColor = custom.errorColor || '#E74C3C';
+    this.componentBackground = custom.componentBackground || '#ffffff';
+    this.itemSize = custom.itemSize || 30;
+    this.borderRadius = custom.borderRadius || 2;
+    this.borderWidth = custom.borderWidth || 1;
+    this.gap = custom.gap || '10px';
+    this.smallGap = custom.smallGap || '5px';
+    this.fontSize = custom.fontSize || '0.9em';
+    this.transition = custom.transition || 'all 0.2s ease';
+    this.fontFamily = custom.fontFamily || 'Sans-serif';
 
-export const defaultConstants = {
-  defaultItemSize: 30,
-  gap: '10px',
-  smallGap: '5px',
-  fontSize: '0.9em',
-  defaultTransition: 'all 0.2s ease',
-  defaultRadius: '5px'
-};
+    this.border = `${this.borderWidth}px solid ${this.borderColor}`;
+    this.focusBorder = `${this.borderWidth}px solid ${this.darkColor}`;
+    this.errorBoarder = `${this.borderWidth}px solid ${this.errorColor}`;
+    this.boxShadow = `0 2px 10px -2px ${this.darkColor}`;
+  }
+}
 
-export default function (colors, constants) {
+export default function (styles) {
 
   const {
     primaryColor,
@@ -26,29 +34,27 @@ export default function (colors, constants) {
     lightColor,
     darkColor,
     tooltipColor,
-    errorColor
-  } = colors;
-
-  const {
-    defaultItemSize,
+    errorColor,
+    componentBackground,
+    itemSize,
+    borderRadius,
+    gap,
     smallGap,
     fontSize,
-    defaultTransition,
-    defaultRadius,
-    gap,
-  } = constants;
+    transition,
+    border,
+    focusBorder,
+    errorBoarder,
+    boxShadow,
+    fontFamily
+  } = styles;
 
   const fullWidth = '100%';
   const z1 = '1';
   const z2 = '2';
 
-  const withLabel = {
-    marginTop: '1em'
-  };
-
   return {
-    colors,
-    constants,
+    ...styles,
     base: {
       position: 'relative',
       boxSizing: 'border-box',
@@ -75,64 +81,68 @@ export default function (colors, constants) {
       right: 0,
       top: 0,
       paddingRight: smallGap,
-      height: `${defaultItemSize}px`,
-      withLabel,
-      clearButton: {
-        cursor: 'pointer'
-      }
+      height: `${itemSize}px`,
+      lineHeight: `${itemSize}px`
     },
 
     icon: {
       display: 'inline-block',
-      height: `${defaultItemSize}px`,
-      lineHeight: `${defaultItemSize}px`
+      height: `${itemSize}px`,
+      lineHeight: `${itemSize}px`
     },
 
     iconSvg: {
       position: 'relative',
       top: '50%',
-      transform: 'translateY(-50%)'
+      transform: 'translateY(-100%)'
     },
 
     invalid: {
-      border: `1px solid ${errorColor}`,
+      border: errorBoarder,
       color: errorColor
     },
 
     field: {
       position: 'relative',
-      height: `${defaultItemSize}px`,
+      height: `${itemSize}px`,
       width: fullWidth,
       outline: 'none',
       paddingLeft: smallGap,
       paddingRight: smallGap,
-      border: `1px solid ${lightColor}`,
+      backgroundColor: componentBackground,
+      border,
+      fontSize,
+      fontFamily,
+      borderRadius,
       ':focus': {
-        border: `1px solid ${darkColor}`,
+        border: focusBorder,
       },
       error: {
-        border: `1px solid ${errorColor}`,
+        border: errorBoarder,
         color: errorColor
       },
       disabled: {
-        border: lightColor,
-        background: lightColor
+        border,
+        backgroundColor: lightColor
       },
       readOnly: {
-        border: 'none'
+        border: 'none',
+        backgroundColor: 'transparent'
       }
     },
 
     select: {
       position: 'relative',
-      height: `${defaultItemSize}px`,
+      height: `${itemSize}px`,
       width: fullWidth,
       outline: 'none',
       paddingLeft: smallGap,
       paddingRight: smallGap,
-      lineHeight: `${defaultItemSize}px`,
-      fontSize: fontSize,
-      border: `1px solid ${lightColor}`,
+      lineHeight: `${itemSize}px`,
+      backgroundColor: componentBackground,
+      fontSize,
+      border,
+      fontFamily,
       expanded: {
         ':focus': {
           border: 'none'
@@ -143,21 +153,23 @@ export default function (colors, constants) {
         fontSize
       },
       ':focus': {
-        border: `1px solid ${darkColor}`,
+        border: focusBorder,
       },
       error: {
-        border: `1px solid ${errorColor}`,
+        border: errorBoarder,
         color: errorColor
       },
       disabled: {
-        border: lightColor,
-        background: lightColor
+        border,
+        backgroundColor: lightColor
       },
       readOnly: {
-        border: 'none'
+        border: 'none',
+        backgroundColor: 'transparent'
       },
       value: {
-        fontSize
+        fontSize,
+        fontFamily
       },
       options: {
         position: 'absolute',
@@ -165,12 +177,12 @@ export default function (colors, constants) {
         left: 0,
         height: 'auto',
         width: fullWidth,
-        border: `1px solid ${lightColor}`,
         boxSizing: 'border-box',
-        boxShadow: '0 2px 10px -2px silver',
         zIndex: z1,
+        boxShadow,
+        border,
         scrollable: {
-          height: `${5 * defaultItemSize}px`,
+          height: `${5 * itemSize}px`,
           overflow: 'auto'
         }
       },
@@ -178,33 +190,36 @@ export default function (colors, constants) {
         position: 'relative',
         width: fullWidth,
         backgroundColor: tc(lightColor).lighten(30).toString(),
-        height: `${defaultItemSize}px`,
-        lineHeight: `${defaultItemSize}px`,
+        height: `${itemSize}px`,
+        lineHeight: `${itemSize}px`,
         paddingLeft: smallGap,
         paddingRight: smallGap,
         boxSizing: 'border-box',
-        borderBottom: `1px solid ${lightColor}`,
+        borderBottom: border,
         cursor: 'pointer',
         fontSize,
+        fontFamily,
         highlighted: {
           backgroundColor: tc(primaryColor).lighten(20).toString()
         }
       },
-
     },
 
     label: {
       fontSize,
+      fontFamily,
       paddingLeft: '2px'
     },
 
     button: {
-      height: `${defaultItemSize * 0.8}px`,
+      height: `${itemSize * 0.8}px`,
       border: 'none',
       outline: 'none',
-      marginTop: `${defaultItemSize * 0.1}px`,
+      marginTop: `${itemSize * 0.1}px`,
       backgroundColor: primaryColor,
       cursor: 'pointer',
+      fontSize,
+      fontFamily,
       fullWidth: {
         width: fullWidth
       },
@@ -228,13 +243,16 @@ export default function (colors, constants) {
 
     errors: {
       width: fullWidth,
-      border: `1px solid ${errorColor}`,
-      borderRadius: defaultRadius,
+      border: errorBoarder,
+      borderRadius,
       padding: gap,
       boxSizing: 'border-box'
     },
 
     error: {
+      fontSize,
+      fontFamily,
+      lineHeight: `${itemSize}px`,
       color: errorColor
     },
 
@@ -244,29 +262,30 @@ export default function (colors, constants) {
       backgroundColor: tc(primaryColor).lighten(35).toString(),
       padding: gap,
       fontFamily: 'Monospace',
-      borderRadius: defaultRadius,
+      borderRadius,
       boxSizing: 'border-box',
       margin: 0,
       payload: {
         wordWrap: 'break-word'
       },
       valid: {
-        background: secondaryColor,
+        backgroundColor: secondaryColor,
         padding: smallGap,
         borderRadius: '5px'
       },
       invalid: {
-        background: errorColor,
+        backgroundColor: errorColor,
         color: 'white',
         padding: smallGap,
         borderRadius: '5px'
       }
     },
+
     slider: {
       wrapper: {
         position: 'relative',
         width: fullWidth,
-        height: `${defaultItemSize}px`,
+        height: `${itemSize}px`,
         cursor: 'pointer'
       },
       value: {
@@ -274,17 +293,18 @@ export default function (colors, constants) {
         boxSizing: 'border-box',
         userSelect: 'none',
         left: 0,
-        top: `-${defaultItemSize}px`,
-        marginTop: `-${defaultItemSize / 4}px`,
-        marginLeft: `-${defaultItemSize / 4}px`,
-        height: `${defaultItemSize }px`,
-        lineHeight: `${defaultItemSize }px`,
-        fontSize: '0.6em',
-        minWidth: `${defaultItemSize}px`,
+        top: `-${itemSize}px`,
+        marginTop: `-${itemSize / 4}px`,
+        marginLeft: `-${itemSize / 4}px`,
+        height: `${itemSize }px`,
+        lineHeight: `${itemSize }px`,
+        minWidth: `${itemSize}px`,
         textAlign: 'center',
         backgroundColor: tc(primaryColor).lighten(20).toString(),
         borderRadius: '50%',
         color: darkColor,
+        fontSize,
+        fontFamily,
         main: {
           position: 'absolute',
           width: '100%',
@@ -293,10 +313,10 @@ export default function (colors, constants) {
         },
         tip: {
           position: 'absolute',
-          bottom: `-${defaultItemSize / 10 }px`,
+          bottom: `-${itemSize / 10 }px`,
           left: '50%',
-          width: `${defaultItemSize / 2 }px`,
-          height: `${defaultItemSize / 2 }px`,
+          width: `${itemSize / 2 }px`,
+          height: `${itemSize / 2 }px`,
           transform: 'translateX(-50%) rotateZ(45deg)',
           backgroundColor: tc(primaryColor).lighten(20).toString(),
           zIndex: z1
@@ -306,14 +326,14 @@ export default function (colors, constants) {
         position: 'relative',
         top: '50%',
         width: '100%',
-        marginTop: `-${defaultItemSize / 20}px`,
-        height: `${defaultItemSize / 10}px`,
+        marginTop: `-${itemSize / 20}px`,
+        height: `${itemSize / 10}px`,
         backgroundColor: tc(primaryColor).lighten(20).toString()
       },
       tick: {
         position: 'absolute',
         width: '1px',
-        height: `${defaultItemSize / 4}px`,
+        height: `${itemSize / 4}px`,
         transform: 'translateY(-50%)',
         top: '50%',
         backgroundColor: tc(primaryColor).lighten(20).toString()
@@ -322,10 +342,10 @@ export default function (colors, constants) {
       head: {
         position: 'absolute',
         boxSizing: 'border-box',
-        width: `${defaultItemSize / 2 }px`,
-        height: `${defaultItemSize / 2 }px`,
+        width: `${itemSize / 2 }px`,
+        height: `${itemSize / 2 }px`,
         backgroundColor: tc(primaryColor).lighten(20).toString(),
-        top: `-${(defaultItemSize / 4) - defaultItemSize / 20 }px`,
+        top: `-${(itemSize / 4) - itemSize / 20 }px`,
         transition: 'transform .3s ease',
         transform: 'translateX(-50%)',
         borderRadius: '50%',
@@ -334,16 +354,16 @@ export default function (colors, constants) {
           outline: 'none',
           transform: 'translateX(-50%) scale(1.2)',
           backgroundColor: primaryColor,
-          top: `-${(defaultItemSize / 4) - (defaultItemSize / 20)}px`,
+          top: `-${(itemSize / 4) - (itemSize / 20)}px`,
         }
       },
       range: {
         position: 'relative',
         top: '100%',
         width: '100%',
-        height: `${defaultItemSize / 2 }px`,
-        fontSize: `${defaultItemSize / 2 }px`,
-        marginTop: `-${defaultItemSize / 4 }px`,
+        height: `${itemSize / 2 }px`,
+        fontSize: `${itemSize / 2 }px`,
+        marginTop: `-${itemSize / 4 }px`,
         min: {
           float: 'left'
         },
@@ -352,50 +372,53 @@ export default function (colors, constants) {
         }
       }
     },
+
     toggle: {
       wrapper: {
         position: 'relative',
         width: fullWidth,
-        height: `${defaultItemSize}px`,
+        height: `${itemSize}px`
       },
       label: {
         float: 'left',
-        paddingLeft: gap,
-        paddingTop: `${defaultItemSize * 0.1}px`,
-        lineHeight: `${defaultItemSize * 0.9}px`,
+        paddingLeft: smallGap,
+        paddingTop: `${itemSize * 0.1}px`,
+        lineHeight: `${itemSize * 0.9}px`,
         fontSize,
       },
       body: {
-        width: `${defaultItemSize * 1.6}px`,
+        width: `${itemSize * 1.6}px`,
         float: 'left',
-        height: `${defaultItemSize * 0.8}px`,
-        border: `1px solid ${lightColor}`,
-        marginTop: `${defaultItemSize * 0.1}px`,
-        borderRadius: `${defaultItemSize}px`,
+        height: `${itemSize * 0.8}px`,
+        marginTop: `${itemSize * 0.1}px`,
+        borderRadius: `${itemSize}px`,
         outline: 'none',
+        backgroundColor: componentBackground,
+        marginRight: smallGap,
         cursor: 'pointer',
+        border,
         ':focus': {
-          border: `1px solid ${darkColor}`,
+          border: focusBorder,
         },
         error: {
-          border: `1px solid ${errorColor}`,
+          border: errorBoarder,
           color: errorColor
         },
         disabled: {
-          border: lightColor,
+          border,
           backgroundColor: lightColor
         }
       },
       head: {
         normal: {
-          borderRadius: `${defaultItemSize}px`,
-          width: `${defaultItemSize * 0.8}px`,
-          height: `${defaultItemSize * 0.8}px`,
+          borderRadius: `${itemSize}px`,
+          width: `${itemSize * 0.8}px`,
+          height: `${itemSize * 0.8}px`,
           backgroundColor: tc(primaryColor).lighten(20).toString(),
-          transition: defaultTransition
+          transition
         },
         active: {
-          marginLeft: `${defaultItemSize * 0.8}px`,
+          marginLeft: `${itemSize * 0.8}px`,
           backgroundColor: primaryColor
         },
         error: {
@@ -410,8 +433,8 @@ export default function (colors, constants) {
     helper: {
       display: 'inline-block',
       cursor: 'pointer',
-      height: `${defaultItemSize}px`,
-      lineHeight: `${defaultItemSize}px`
+      height: `${itemSize}px`,
+      lineHeight: `${itemSize}px`
     },
 
     tooltip: {
@@ -420,9 +443,9 @@ export default function (colors, constants) {
       fontSize: '0.9em',
       width: 'auto',
       backgroundColor: tooltipColor,
-      minHeight: `${defaultItemSize}px`,
+      minHeight: `${itemSize}px`,
       right: 0,
-      bottom: `${defaultItemSize + 10}px`,
+      bottom: `${itemSize + 10}px`,
       paddingTop: smallGap,
       paddingLeft: smallGap,
       paddingRight: smallGap,

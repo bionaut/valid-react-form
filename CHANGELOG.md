@@ -1,3 +1,13 @@
+**v1.0.0**
+----------
+- Removed string validator
+- Changed validator to use functions
+- Refactored styles
+- Added storybook and stories
+- Fixed icons
+- Updated Readme
+- Removed example
+
 **v0.2.2**
 ----------
 - Added touch events for Slider

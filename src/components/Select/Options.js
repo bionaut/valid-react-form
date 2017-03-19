@@ -42,7 +42,7 @@ class Options extends Component {
     const length = source && source.length;
 
     const compensateStyle = styles && {
-      marginTop: `-${scroll * styles.constants.defaultItemSize}px`
+      marginTop: `-${scroll * styles.itemSize}px`
     };
 
     const computedStyles = styles && [

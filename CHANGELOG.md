@@ -1,3 +1,6 @@
+**v1.0.2**
+- Added dynamic callback for Valid
+
 **v1.0.0**
 ----------
 - Removed string validator
@@ -26,4 +29,4 @@
 - Added helper prop to field and select
 - Hiding icons in read-only mode in select component
 - Removed babel-polyfill
-- Override colors and constants props for ValidStyles 
+- Override colors and constants props for ValidStyles

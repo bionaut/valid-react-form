@@ -91,10 +91,11 @@ export default class Valid extends Component {
     } = this.context;
 
     const {
+      name = 'untitled',
+      changeCallback = 'onChange',
       required,
       validator,
       standalone,
-      name = 'untitled',
       errorMessages,
       className,
       disabled,
@@ -110,7 +111,13 @@ export default class Valid extends Component {
       value,
     } = this.state;
 
-    const errorProps = { message: !errorPanel && (submitted || standalone) && !disabled && ((errors && errors[name]) || resolveError(errorMessages, failedValidator)) };
+    const errorProps = {
+      message: !errorPanel &&
+      (submitted || standalone) &&
+      !disabled &&
+      ((errors && errors[name]) ||
+      resolveError(errorMessages, failedValidator))
+    };
 
     const wrapperClasses = classes(
       'valid-component',
@@ -120,7 +127,7 @@ export default class Valid extends Component {
     );
 
     const modifiedChildren = cloneElement(children, {
-      onChange: this.handleChange.bind(this),
+      [changeCallback]: this.handleChange.bind(this),
       style: (styles && (valid ? {} : submitted && !valid && styles.invalid)) || {}
     });
 
@@ -132,6 +139,10 @@ export default class Valid extends Component {
     );
   }
 }
+
+Valid.propTypes = {
+  name: PropTypes.string.isRequired
+};
 
 Valid.contextTypes = {
   styles: PropTypes.object,

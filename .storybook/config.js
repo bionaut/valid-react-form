@@ -8,6 +8,7 @@ function loadStories() {
   require('./stories/button.story');
   require('./stories/form.story');
   require('./stories/styles.story');
+  require('./stories/valid.story');
 }
 
 configure(loadStories, module);

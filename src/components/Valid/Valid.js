@@ -15,8 +15,8 @@ export default class Valid extends Component {
 
   componentDidMount() {
     const { register } = this.context;
-    const { value }  = this.state;
-    const { name, friendlyName, errorMessages }  = this.props;
+    const { value } = this.state;
+    const { name, friendlyName, errorMessages } = this.props;
 
     if (register) {
       register(name, friendlyName, errorMessages);
@@ -76,8 +76,10 @@ export default class Valid extends Component {
   }
 
   handleChange(ev) {
-    const value = ev.target.value;
-    this.update(value);
+    if (ev.target && ev.target.value) {
+      return this.update(ev.target.value);
+    }
+    this.update(ev);
   }
 
   render() {
@@ -128,11 +130,13 @@ export default class Valid extends Component {
 
     const modifiedChildren = cloneElement(children, {
       [changeCallback]: this.handleChange.bind(this),
-      style: (styles && (valid ? {} : submitted && !valid && styles.invalid)) || {}
+      style: (styles && (valid
+        ? { ...style }
+        : submitted && !valid && { ...style, ...styles.invalid })) || { ...style }
     });
 
     return (
-      <div className={wrapperClasses}>
+      <div className={wrapperClasses} >
         {modifiedChildren}
         <Error {...errorProps} />
       </div>

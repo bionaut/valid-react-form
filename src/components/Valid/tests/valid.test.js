@@ -39,9 +39,8 @@ describe('Valid universal component', () => {
       <input type="text"/>,
       {
         name: 'test',
-        value: 'passed',
         validator: {
-          isLength: (value) => validator.isLength(value, {min:2, max: undefined}),
+          isLength: (value) => validator.isLength(value, {min:2}),
         },
         errorMessages: 'Some error'
       },

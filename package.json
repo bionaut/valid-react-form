@@ -1,6 +1,6 @@
 {
   "name": "valid-react-form",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React form components with validations and error handling",
   "main": "dist/index.js",
   "repository": {
